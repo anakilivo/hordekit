@@ -1,0 +1,103 @@
+[project]
+name = "hordekit"
+version = "0.1.0"
+description = "hordekit"
+dependencies = []
+requires-python = ">=3.9"
+
+[project.optional-dependencies]
+dev = [
+    "autoflake>=2.3.0",
+    "black>=25.0.0",
+    "flake8>=7.0.0",
+    "flake8-pyproject>=1.2.0",
+    "isort>=6.0.0",
+    "mypy>=1.17.0",
+    "pytest>=8.0.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.black]
+line-length = 120
+target-version = ['py39']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 120
+known_first_party = ["hordekit"]
+known_third_party = ["pytest", "base64", "json", "io", "pathlib", "typing", "abc", "enum", "random", "re"]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = [
+    "base64",
+    "json", 
+    "io",
+    "pathlib",
+    "typing",
+    "abc",
+    "enum",
+    "random",
+    "re"
+]
+ignore_missing_imports = true
+
+[tool.flake8]
+max-line-length = 120
+extend-ignore = ["E203", "W503"]
+exclude = [
+    ".git",
+    "__pycache__",
+    ".venv",
+    "build",
+    "dist",
+    ".mypy_cache",
+    ".pytest_cache"
+]
+per-file-ignores = [
+    "__init__.py:F401",
+    "test_*.py:E402",
+    "demo_*.py:E402"
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["hordekit"]
+
+[dependency-groups]
+dev = [
+    "autoflake>=2.3.1",
+    "flake8-pyproject>=1.2.3",
+    "pytest>=8.4.1",
+]
