@@ -1,14 +1,31 @@
 """
 Caesar Cipher implementation.
-A simple substitution cipher that shifts each letter by a fixed number of positions.
+
+The Caesar cipher is a type of substitution cipher where each letter in the plaintext
+is shifted a certain number of positions down the alphabet.
 """
 
 from typing import Any, Dict, Optional
 
-from ...utils import AttackMethod, CryptoAlgorithm  # type: ignore
+from ...utils import AttackMethod  # type: ignore
+from .base_substitution import BaseSubstitutionCipher
 
 
-class CaesarCipher(CryptoAlgorithm):
+class CaesarCipher(BaseSubstitutionCipher):
+    """
+    Caesar Cipher - a simple substitution cipher that shifts letters by a fixed amount.
+
+    The Caesar cipher shifts each letter in the plaintext by a fixed number of positions
+    down the alphabet. For example, with a shift of 3, 'A' becomes 'D', 'B' becomes 'E', etc.
+
+    Attributes:
+        shift (int): The number of positions to shift each letter
+        alphabet (str): The alphabet used for encryption
+        alphabet_lower (str): Lowercase alphabet
+        encrypt_table (dict): Translation table for encryption
+        decrypt_table (dict): Translation table for decryption
+    """
+
     SUPPORTED_ATTACK_METHODS = [
         AttackMethod.BRUTE_FORCE,
         AttackMethod.FREQUENCY_ANALYSIS,
@@ -16,34 +33,25 @@ class CaesarCipher(CryptoAlgorithm):
     ]
 
     def _validate_parameters(self, **kwargs: Any) -> None:
-        """Validate Caesar cipher parameters"""
+        """Validate Caesar cipher parameters."""
         shift = kwargs.get("shift")
+
         if shift is None:
-            raise ValueError("Shift parameter is required")
+            raise ValueError("shift parameter is required")
+
         if not isinstance(shift, int):
-            raise ValueError("Shift must be an integer")
+            raise ValueError("shift must be an integer")
+
         if shift < 1 or shift > 25:
-            raise ValueError("Shift must be between 1 and 25")
+            raise ValueError("shift must be between 1 and 25")
 
-        alphabet = kwargs.get("alphabet", None)
-        if alphabet is not None and not isinstance(alphabet, str):
-            raise ValueError("Alphabet must be a string")
-
-    def _setup_algorithm(self, **kwargs: Any) -> None:
-        """Configure Caesar cipher with validated parameters"""
-        shift_value = kwargs.get("shift")
-        if shift_value is None:
-            raise ValueError("Shift parameter is required")
-        self.shift: int = shift_value
-        self.alphabet: str = kwargs.get("alphabet", "ABCDEFGHIJKLMNOPQRSTUVWXYZ").upper()
-        self.alphabet_lower: str = self.alphabet.lower()
-
-        # Create shift mappings
-        self._create_mappings()
+    def _setup_substitution_algorithm(self, **kwargs: Any) -> None:
+        """Set up the Caesar cipher algorithm."""
+        self.shift = kwargs["shift"]
 
     def _create_mappings(self) -> None:
-        """Create encryption and decryption translation tables"""
-        # Create combined tables for both upper and lower case
+        """Create encryption and decryption translation tables."""
+        # Create translation tables for both upper and lower case
         from_chars = self.alphabet + self.alphabet_lower
         to_chars_encrypt = (
             self.alphabet[self.shift :]
@@ -61,151 +69,23 @@ class CaesarCipher(CryptoAlgorithm):
         self.encrypt_table = str.maketrans(from_chars, to_chars_encrypt)
         self.decrypt_table = str.maketrans(from_chars, to_chars_decrypt)
 
-    def _encode_raw(self, data: bytes, **kwargs: Any) -> bytes:
-        """Encrypt data using Caesar cipher"""
-        text = data.decode("utf-8")
-
-        # Use single translation table for both cases
-        encrypted = text.translate(self.encrypt_table)
-
-        return encrypted.encode("utf-8")
-
-    def _decode_raw(self, data: bytes, **kwargs: Any) -> bytes:
-        """Decrypt data using Caesar cipher"""
-        text = data.decode("utf-8")
-
-        # Use single translation table for both cases
-        decrypted = text.translate(self.decrypt_table)
-
-        return decrypted.encode("utf-8")
-
-    @classmethod
-    def get_attack_methods(cls) -> Dict[AttackMethod, str]:
-        """Return available attack methods for Caesar cipher"""
-        return {
-            AttackMethod.BRUTE_FORCE: "Try all possible shift values (1-25)",
-            AttackMethod.FREQUENCY_ANALYSIS: "Analyze letter frequency patterns",
-            AttackMethod.KNOWN_PLAINTEXT: "Use known plaintext-ciphertext pairs",
-        }
-
     @classmethod
     def generate_key(cls) -> "CaesarCipher":
-        """
-        Generate a Caesar cipher with random shift value.
-
-        Returns:
-            CaesarCipher: New instance with random shift value
-        """
+        """Generate a random Caesar cipher key."""
         import random
 
         shift = random.randint(1, 25)
         return cls(shift=shift)
 
     @classmethod
-    def _attack_brute_force(cls, **kwargs: Any) -> Dict[str, Any]:
-        """
-        Brute force attack - try all possible shift values.
-
-        Args:
-            ciphertext (str): Encrypted text to decrypt
-            mask (str, optional): Regular expression pattern to match successful decryption
-
-        Returns:
-            Dict[str, Any]: Attack results with all decryptions and best match if mask provided
-        """
-        ciphertext = kwargs.get("ciphertext", "")
-        mask = kwargs.get("mask", None)
-
-        if not ciphertext:
-            raise ValueError("ciphertext parameter required for brute force attack")
-
-        import re
-
-        results = {}
-        best_match = None
-        best_shift = None
-
-        for shift in range(1, 26):
-            instance = cls(shift=shift)
-            decrypted = instance.decode(ciphertext)
-            results[shift] = decrypted
-
-            # Check if this decryption matches the mask
-            if mask and re.search(mask, decrypted):
-                best_match = decrypted
-                best_shift = shift
-
-        result: Dict[str, Any] = {"all_results": results}
-
-        if best_match:
-            result["best_match"] = best_match
-            result["best_shift"] = best_shift
-            result["mask_matched"] = True
-        elif mask:
-            result["mask_matched"] = False
-
-        return result
+    def _get_possible_keys(cls) -> list:
+        """Get all possible keys for Caesar cipher."""
+        return [{"shift": i} for i in range(1, 26)]
 
     @classmethod
-    def _attack_frequency_analysis(cls, **kwargs: Any) -> Dict[str, Any]:
-        """
-        Frequency analysis attack on Caesar cipher using n-gram scoring.
-
-        Returns:
-            Dict[str, Any]: Analysis results with most likely shift
-        """
-        ciphertext = kwargs.get("ciphertext", "")
-        if not ciphertext:
-            raise ValueError("ciphertext parameter required for frequency analysis")
-
-        from ...cryptoanalysis.ngram_score import BigramScore, MonogramScore, TrigramScore  # type: ignore
-
-        # Initialize n-gram scorers
-        monogram_scorer = MonogramScore()
-        bigram_scorer = BigramScore()
-        trigram_scorer = TrigramScore()
-
-        # Find best shift by testing all possibilities
-        best_shift: int = 1
-        best_score: float = float("-inf")  # Higher score is better for n-gram scoring
-
-        for shift in range(1, 26):
-            # Temporarily set shift and create mappings
-            instance = cls(shift=shift)
-
-            # Decrypt with current shift
-            decrypted = instance.decode(ciphertext)
-
-            # Calculate score using multiple n-gram methods
-            try:
-                # Get scores from different n-gram methods
-                mono_score = monogram_scorer.score(decrypted)
-                bi_score = bigram_scorer.score(decrypted)
-                tri_score = trigram_scorer.score(decrypted)
-
-                # Combined score (weighted average)
-                combined_score = mono_score * 0.3 + bi_score * 0.4 + tri_score * 0.3
-
-                if combined_score > best_score:
-                    best_score = combined_score
-                    best_shift = shift
-
-            except Exception:
-                # Skip this shift if scoring fails
-                continue
-
-        # Decrypt with best shift
-        instance = cls(shift=best_shift)
-        decrypted = instance.decode(ciphertext)
-
-        return {
-            "most_likely_shift": best_shift,
-            "confidence_score": best_score,
-            "decrypted_text": decrypted,
-            "monogram_score": monogram_scorer.score(decrypted.encode("utf-8")),
-            "bigram_score": bigram_scorer.score(decrypted.encode("utf-8")),
-            "trigram_score": trigram_scorer.score(decrypted.encode("utf-8")),
-        }
+    def _key_to_string(cls, key: Dict[str, Any]) -> str:
+        """Convert key dictionary to string representation."""
+        return str(key["shift"])
 
     @classmethod
     def _attack_known_plaintext(cls, **kwargs: Any) -> Optional[int]:

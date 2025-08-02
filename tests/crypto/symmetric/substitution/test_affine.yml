@@ -1,0 +1,26 @@
+# Affine Cipher Test Cases with Masks
+
+test_affine_examples:
+  - plaintext: "YUBITSEC{A_FINE_CIPHER}"
+    a: 9
+    b: 13
+    ciphertext: "VLWHCTXF{N_GHAX_FHSYXK}"
+    mask: "YUBITSEC\\{.*\\}"
+
+  - plaintext: "actf{it_begins}"
+    a: 19
+    b: 12
+    ciphertext: "myjd{ij_fkwizq}"
+    mask: "actf\\{.*\\}"
+
+  - plaintext: "IFYOUAREINTERESTEDCHECKOUTMORECRYTPOCTFSATCRYPTOHACK"
+    a: 23
+    b: 7
+    ciphertext: "JSNRZHIVJUCVIVFCVYBMVBDRZCXRIVBINCORBCSFHCBINOCRMHBD"
+    mask: ".*CTF.*"
+
+  - plaintext: "AFFINECIPHER"
+    a: 5
+    b: 8
+    ciphertext: "IHHWVCSWFRCP"
+    mask: ".*CIPHER" 

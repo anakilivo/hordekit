@@ -30,7 +30,7 @@ class TestCaesarCipher(BaseCryptoTest):
 
         assert "all_results" in results
         assert len(results["all_results"]) == 25
-        assert results["all_results"][self.algorithm.shift] == message
+        assert results["all_results"][str(self.algorithm.shift)] == message
 
     def test_brute_force_attack_with_mask(self):
         """Test brute force attack method with mask."""
@@ -42,11 +42,11 @@ class TestCaesarCipher(BaseCryptoTest):
 
         assert "all_results" in results
         assert "best_match" in results
-        assert "best_shift" in results
+        assert "best_key" in results
         assert "mask_matched" in results
         assert results["mask_matched"] is True
         assert results["best_match"] == message
-        assert results["best_shift"] == self.algorithm.shift
+        assert results["best_key"] == str(self.algorithm.shift)
 
     def test_frequency_analysis_attack(self):
         """Test frequency analysis attack method."""
@@ -56,14 +56,14 @@ class TestCaesarCipher(BaseCryptoTest):
 
         analysis = self.algorithm_class.attack(AttackMethod.FREQUENCY_ANALYSIS, ciphertext=encrypted)
 
-        assert "most_likely_shift" in analysis
+        assert "most_likely_key" in analysis
         assert "decrypted_text" in analysis
         assert "confidence_score" in analysis
         assert "monogram_score" in analysis
         assert "bigram_score" in analysis
         assert "trigram_score" in analysis
 
-        assert analysis["most_likely_shift"] == self.algorithm.shift
+        assert analysis["most_likely_key"] == str(self.algorithm.shift)
 
     def test_known_plaintext_attack(self):
         """Test known plaintext attack method."""
@@ -92,4 +92,4 @@ class TestCaesarCipher(BaseCryptoTest):
 
         assert attack_results["mask_matched"] is True
         assert attack_results["best_match"] == plaintext
-        assert attack_results["best_shift"] == shift
+        assert attack_results["best_key"] == str(shift)

@@ -16,7 +16,7 @@ from faker import Faker
 from pathlib import Path
 from typing import Any, Dict, List, Type
 
-from hordekit.crypto.utils import AttackMethod, CryptoAlgorithm
+from hordekit.crypto.utils import CryptoAlgorithm
 
 # Add the project root to the path
 project_root = Path(__file__).parent.parent
@@ -76,16 +76,6 @@ class BaseCryptoTest:
             with pytest.raises(ValueError):
                 self.algorithm_class(**invalid_params)
 
-    def test_attack_methods_list(self):
-        """Test that attack methods are properly listed."""
-        methods = self.algorithm.get_attack_methods()
-        assert isinstance(methods, dict)
-        assert len(methods) > 0
-
-        # Check that all methods are AttackMethod instances
-        for method in methods:
-            assert isinstance(method, AttackMethod)
-
     def test_unknown_attack_method(self):
         """Test error handling for unknown attack methods."""
         with pytest.raises(ValueError):
@@ -94,9 +84,9 @@ class BaseCryptoTest:
     def test_missing_attack_parameters(self):
         """Test error handling for missing attack parameters."""
         # Get first available attack method
-        methods = self.algorithm.get_attack_methods()
+        methods = self.algorithm_class.SUPPORTED_ATTACK_METHODS
         if methods:
-            first_method = list(methods.keys())[0]
+            first_method = methods[0]
             with pytest.raises(ValueError):
                 self.algorithm.attack(first_method)
 
@@ -148,7 +138,6 @@ class BaseCryptoTest:
             "_encode_raw",
             "_decode_raw",
             "generate_key",
-            "get_attack_methods",
         ]
 
         for method_name in required_methods:

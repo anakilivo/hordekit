@@ -18,7 +18,7 @@ type-check:  ## Run mypy type checking
 test:  ## Run tests
 	uv run pytest tests/ -v
 
-check: format lint type-check test  ## Run all checks
+check: format lint type-check test clean  ## Run all checks
 
 clean:  ## Clean up cache files
 	find . -type d -name "__pycache__" -exec rm -rf {} +
