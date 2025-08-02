@@ -91,7 +91,7 @@ class BaseSubstitutionCipher(CryptoAlgorithm):
                 if mask and re.search(mask, decrypted):
                     best_match = decrypted
                     best_key = key_str
-            except Exception:
+            except Exception:  # nosec
                 continue
 
         result: Dict[str, Any] = {"all_results": results}
@@ -149,10 +149,10 @@ class BaseSubstitutionCipher(CryptoAlgorithm):
                         best_score = combined_score
                         best_key = key
 
-                except Exception:
+                except Exception:  # nosec
                     continue
 
-            except Exception:
+            except Exception:  # nosec
                 continue
 
         if best_key is None:

@@ -16,6 +16,10 @@ dev = [
     "mypy>=1.17.0",
     "parametrize-from-file>=0.20.0",
     "pytest>=8.0.0",
+    "pytest-cov>=4.0.0",
+    "build>=1.0.0",
+    "bandit>=1.7.0",
+    "safety>=2.3.0",
 ]
 
 [build-system]
@@ -114,11 +118,24 @@ filterwarnings = [
 # Exclude base test class from being run as a test
 norecursedirs = ["tests/base_test_class.py"]
 
+
+[[tool.uv.index]]
+name = "safety"
+url = "https://pkgs.safetycli.com/repository/horde/project/hordekit/pypi/simple/"
+default = false
 [dependency-groups]
 dev = [
     "autoflake>=2.3.1",
+    "bandit>=1.8.6",
+    "black>=25.1.0",
+    "build>=1.3.0",
     "faker>=37.5.3",
+    "flake8>=7.3.0",
     "flake8-pyproject>=1.2.3",
+    "isort>=6.0.1",
+    "mypy>=1.17.1",
     "parametrize-from-file>=0.20.0",
     "pytest>=8.4.1",
+    "pytest-cov>=6.2.1",
+    "safety>=3.6.0",
 ]

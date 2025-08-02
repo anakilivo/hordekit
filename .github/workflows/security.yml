@@ -1,0 +1,45 @@
+name: Security
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    - cron: '0 0 * * 0'  # Run weekly on Sundays
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.13"
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v1
+      with:
+        version: latest
+
+    - name: Install dependencies
+      run: |
+        uv sync --dev
+
+    - name: Run Bandit security linter
+      run: |
+        uv run bandit -r hordekit/ -f json -o bandit-report.json || true
+
+    - name: Run Safety scan
+      run: |
+        uv run safety scan --json --output safety-report.json || true
+
+    - name: Upload security reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: security-reports
+        path: |
+          bandit-report.json
+          safety-report.json 

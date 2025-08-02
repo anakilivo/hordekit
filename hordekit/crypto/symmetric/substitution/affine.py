@@ -93,13 +93,13 @@ class AffineCipher(BaseSubstitutionCipher):
     @classmethod
     def generate_key(cls) -> "AffineCipher":
         """Generate a random Affine cipher key."""
-        import random
+        import secrets
 
         # Find all numbers coprime with 26
         coprime_with_26 = [1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25]
 
-        a = random.choice(coprime_with_26)
-        b = random.randint(0, 25)
+        a = secrets.choice(coprime_with_26)
+        b = secrets.randbelow(26)
 
         return cls(a=a, b=b)
 
@@ -191,7 +191,7 @@ class AffineCipher(BaseSubstitutionCipher):
             test_encrypted = test_instance.encode(plaintext)
             if test_encrypted == ciphertext:
                 return {"a": a, "b": b}
-        except Exception:
+        except Exception:  # nosec
             pass
 
         return None

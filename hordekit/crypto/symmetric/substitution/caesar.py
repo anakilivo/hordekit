@@ -72,9 +72,9 @@ class CaesarCipher(BaseSubstitutionCipher):
     @classmethod
     def generate_key(cls) -> "CaesarCipher":
         """Generate a random Caesar cipher key."""
-        import random
+        import secrets
 
-        shift = random.randint(1, 25)
+        shift = secrets.randbelow(25) + 1
         return cls(shift=shift)
 
     @classmethod

@@ -18,7 +18,11 @@ type-check:  ## Run mypy type checking
 test:  ## Run tests
 	uv run pytest tests/ -v
 
-check: format lint type-check test clean  ## Run all checks
+security:  ## Run security checks
+	uv run bandit -r hordekit/
+	uv run safety scan
+
+check: format lint type-check test security clean  ## Run all checks
 
 clean:  ## Clean up cache files
 	find . -type d -name "__pycache__" -exec rm -rf {} +
