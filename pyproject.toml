@@ -9,10 +9,12 @@ requires-python = ">=3.9"
 dev = [
     "autoflake>=2.3.0",
     "black>=25.0.0",
+    "faker>=37.0.0",
     "flake8>=7.0.0",
     "flake8-pyproject>=1.2.0",
     "isort>=6.0.0",
     "mypy>=1.17.0",
+    "parametrize-from-file>=0.20.0",
     "pytest>=8.0.0",
 ]
 
@@ -95,9 +97,28 @@ per-file-ignores = [
 [tool.hatch.build.targets.wheel]
 packages = ["hordekit"]
 
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+addopts = [
+    "-v",
+    "--tb=short",
+    "--strict-markers",
+    "--disable-warnings"
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning"
+]
+# Exclude base test class from being run as a test
+norecursedirs = ["tests/base_test_class.py"]
+
 [dependency-groups]
 dev = [
     "autoflake>=2.3.1",
+    "faker>=37.5.3",
     "flake8-pyproject>=1.2.3",
+    "parametrize-from-file>=0.20.0",
     "pytest>=8.4.1",
 ]

@@ -1,0 +1,20 @@
+test_caesar_with_mask:
+  - plaintext: picoCTF{not_too_bad_of_a_problem}
+    shift: 13
+    ciphertext: cvpbPGS{abg_gbb_onq_bs_n_ceboyrz}
+    mask: picoCTF{.*}
+
+  - plaintext: picoCTF{next_time_I'll_try_2_rounds_of_rot13_ulYvpVag}
+    shift: 13
+    ciphertext: cvpbPGS{arkg_gvzr_V'yy_gel_2_ebhaqf_bs_ebg13_hyLicInt}
+    mask: picoCTF{.*}
+
+  - plaintext: justagoodoldcaesarcipherfwacbovv
+    shift: 6
+    ciphertext: payzgmuujurjigkygxiovnkxlcgihubb
+    mask: .*caesar.*
+
+  - plaintext: THECAESARCIPHERISONEOFTHEEARLIESTKNOWNANDSIMPLESTCIPHERS
+    shift: 5
+    ciphertext: YMJHFJXFWHNUMJWNXTSJTKYMJJFWQNJXYPSTBSFSIXNRUQJXYHNUMJWX
+    mask: .*CAESAR.*
