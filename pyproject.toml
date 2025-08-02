@@ -20,6 +20,10 @@ dev = [
     "build>=1.0.0",
     "bandit>=1.7.0",
     "safety>=2.3.0",
+    "mkdocs>=1.5.0",
+    "mkdocs-material>=9.0.0",
+    "mkdocstrings>=0.24.0",
+    "mkdocstrings-python>=1.7.0",
 ]
 
 [build-system]
@@ -133,6 +137,10 @@ dev = [
     "flake8>=7.3.0",
     "flake8-pyproject>=1.2.3",
     "isort>=6.0.1",
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.6.16",
+    "mkdocstrings>=0.30.0",
+    "mkdocstrings-python>=1.16.12",
     "mypy>=1.17.1",
     "parametrize-from-file>=0.20.0",
     "pytest>=8.4.1",
