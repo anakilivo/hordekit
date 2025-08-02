@@ -52,6 +52,7 @@ uv add hordekit
 - **Caesar Cipher**: Simple shift cipher
 - **Affine Cipher**: Mathematical substitution cipher
 - **Atbash Cipher**: Alphabet mirroring cipher
+- **ROT13 Cipher**: Fixed 13-position shift cipher
 
 ### Attack Methods
 

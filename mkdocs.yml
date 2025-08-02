@@ -53,6 +53,7 @@ nav:
         - Caesar Cipher: crypto/symmetric/substitution/caesar.md
         - Affine Cipher: crypto/symmetric/substitution/affine.md
         - Atbash Cipher: crypto/symmetric/substitution/atbash.md
+        - ROT13 Cipher: crypto/symmetric/substitution/rot13.md
   - API Reference:
     - Crypto Utils: api/crypto_utils.md
     - Base Classes: api/base_classes.md
