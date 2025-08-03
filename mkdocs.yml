@@ -49,7 +49,8 @@ nav:
   - Quick Start: quickstart.md
   - Algorithms:
     - Symmetric:
-      - Substitution:
+      - Substitution Ciphers: 
+        - crypto/symmetric/substitution/index.md
         - Caesar Cipher: crypto/symmetric/substitution/caesar.md
         - Affine Cipher: crypto/symmetric/substitution/affine.md
         - Atbash Cipher: crypto/symmetric/substitution/atbash.md

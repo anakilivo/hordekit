@@ -49,6 +49,7 @@ uv add hordekit
 
 #### Substitution Ciphers
 
+- **Overview**: Base class and common functionality for substitution ciphers
 - **Caesar Cipher**: Simple shift cipher
 - **Affine Cipher**: Mathematical substitution cipher
 - **Atbash Cipher**: Alphabet mirroring cipher
