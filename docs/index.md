@@ -53,6 +53,7 @@ uv add hordekit
 - **Affine Cipher**: Mathematical substitution cipher
 - **Atbash Cipher**: Alphabet mirroring cipher
 - **ROT13 Cipher**: Fixed 13-position shift cipher
+- **ROT47 Cipher**: Extended ASCII shift cipher
 
 ### Attack Methods
 

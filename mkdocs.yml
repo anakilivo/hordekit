@@ -54,6 +54,7 @@ nav:
         - Affine Cipher: crypto/symmetric/substitution/affine.md
         - Atbash Cipher: crypto/symmetric/substitution/atbash.md
         - ROT13 Cipher: crypto/symmetric/substitution/rot13.md
+        - ROT47 Cipher: crypto/symmetric/substitution/rot47.md
   - API Reference:
     - Crypto Utils: api/crypto_utils.md
     - Base Classes: api/base_classes.md
