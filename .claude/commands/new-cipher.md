@@ -62,9 +62,29 @@ The Mermaid diagram must show:
 - The per-byte transformation logic (flowchart)
 - A concrete letter-by-letter example (at least 4-5 chars)
 
+The **Known Attacks** section must use Markdown links to the attack docs — not just module names:
+
+```markdown
+## Known Attacks
+
+| Attack | When applicable |
+|--------|----------------|
+| [Brute Force](../../../attacks/generic/brute_force.md) | Always — N possible keys |
+| [Frequency Analysis](../../../attacks/substitution/frequency.md) | Ciphertext > ~100 characters |
+```
+
+Relative path from `docs/crypto/classical/{category}/` to attacks:
+- `../../../attacks/generic/brute_force.md`
+- `../../../attacks/generic/dictionary.md`
+- `../../../attacks/substitution/frequency.md`
+- `../../../attacks/substitution/ioc.md`
+- `../../../attacks/vigenere/kasiski.md`
+
 ## 5. Update mkdocs.yml nav
 
-Add the new page under the correct section in `mkdocs.yml`.
+Add the cipher page under the correct section in `mkdocs.yml`.
+
+If a **new attack** was created in step 6, also add it under the `Attacks:` section of the nav.
 
 ## 6. Attacks (if applicable)
 
@@ -82,6 +102,12 @@ If the cipher requires a **new** dedicated attack:
 2. Export it from `hordekit/crypto/attacks/{category}/__init__.py`
 3. Add to top-level `hordekit/crypto/attacks/__init__.py`
 4. Write tests in `tests/crypto/attacks/test_{attack_name}.py`
+5. Write docs in `docs/crypto/attacks/{category}/{attack_name}.md` — include:
+   - Overview (what it detects/recovers, when to use)
+   - Mermaid flowchart of the algorithm
+   - API section with full example
+   - "See also" links back to the cipher docs that are vulnerable to it
+6. Add the doc to `mkdocs.yml` under `Attacks:`
 
 ## 7. Run ruff
 

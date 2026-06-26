@@ -56,6 +56,15 @@ nav:
         - Atbash: crypto/classical/substitution/atbash.md
         - Affine: crypto/classical/substitution/affine.md
         - Vigenère: crypto/classical/substitution/vigenere.md
+    - Attacks:
+      - Generic:
+        - Brute Force: crypto/attacks/generic/brute_force.md
+        - Dictionary Attack: crypto/attacks/generic/dictionary.md
+      - Substitution:
+        - Frequency Analysis: crypto/attacks/substitution/frequency.md
+        - Index of Coincidence: crypto/attacks/substitution/ioc.md
+      - Vigenère:
+        - Kasiski Test: crypto/attacks/vigenere/kasiski.md
   - API Reference:
     - Core: api/base_classes.md
   - Roadmap: roadmap.md

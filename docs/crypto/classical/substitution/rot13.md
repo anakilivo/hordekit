@@ -88,7 +88,9 @@ result = (
 
 | Attack | When applicable |
 |--------|----------------|
-| Trivial — apply ROT13 again | Always; there is exactly one key |
+| Trivial — apply ROT13 again (`ROT13().decrypt(ct)`) | Always; there is exactly one key |
+| [Brute Force](../../attacks/generic/brute_force.md) | Automated version of the trivial case |
+| [Frequency Analysis](../../attacks/substitution/frequency.md) | Ciphertext > ~100 characters |
 
 ## References
 

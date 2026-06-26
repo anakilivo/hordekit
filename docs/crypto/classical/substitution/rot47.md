@@ -82,7 +82,8 @@ result = (
 
 | Attack | When applicable |
 |--------|----------------|
-| Trivial — apply ROT47 again | Always; there is exactly one key |
+| Trivial — apply ROT47 again (`ROT47().decrypt(ct)`) | Always; there is exactly one key |
+| [Brute Force](../../attacks/generic/brute_force.md) | Automated version of the trivial case |
 
 ## References
 

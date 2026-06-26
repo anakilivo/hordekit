@@ -88,8 +88,9 @@ result = (
 
 | Attack | When applicable |
 |--------|----------------|
-| Trivial — apply Atbash again | Always; there is exactly one key |
-| Frequency analysis | Ciphertext > ~100 characters |
+| Trivial — apply Atbash again (`Atbash().decrypt(ct)`) | Always; there is exactly one key |
+| [Brute Force](../../attacks/generic/brute_force.md) | Automated version of the trivial case |
+| [Frequency Analysis](../../attacks/substitution/frequency.md) | Ciphertext > ~100 characters |
 
 ## References
 

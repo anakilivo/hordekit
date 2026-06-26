@@ -99,14 +99,15 @@ result = (
 
 ## Known Attacks
 
-| Attack | When applicable |
-|--------|----------------|
-| Kasiski test | Identifies key length from repeated ciphertext patterns |
-| Index of coincidence | Confirms key length and detects polyalphabetic cipher |
-| Frequency analysis per position | Once key length is known, each column is a Caesar cipher |
+| Attack | Role |
+|--------|------|
+| [Kasiski Test](../../attacks/vigenere/kasiski.md) | Finds key length from spacings of repeated trigrams |
+| [Index of Coincidence](../../attacks/substitution/ioc.md) | Confirms key length and detects polyalphabetic cipher |
+| [Frequency Analysis](../../attacks/substitution/frequency.md) | Per-column attack once key length is known (each column is a Caesar) |
+| [Dictionary Attack](../../attacks/generic/dictionary.md) | Try a wordlist of common keyword candidates |
 
 !!! note
-    Vigenere does not implement `possible_keys()` — the key space is too large for brute force. Use Kasiski + per-column frequency analysis instead.
+    Vigenère does not implement `possible_keys()` — the key space is too large for brute force. Use [Kasiski](../../attacks/vigenere/kasiski.md) + [IoC](../../attacks/substitution/ioc.md) to find the key length, then [frequency analysis](../../attacks/substitution/frequency.md) per column.
 
 ## References
 

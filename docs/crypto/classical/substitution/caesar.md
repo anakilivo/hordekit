@@ -89,16 +89,16 @@ result = (
 
 ## Known Attacks
 
-| Attack | Module | Applicable when |
-|--------|--------|----------------|
-| Brute force | `hordekit.crypto.attacks.generic.brute_force` | Always — only 25 possible keys |
-| Frequency analysis | `hordekit.crypto.attacks.substitution.frequency` | Ciphertext > ~100 characters |
+| Attack | When applicable |
+|--------|----------------|
+| [Brute Force](../../attacks/generic/brute_force.md) | Always — only 25 possible keys |
+| [Frequency Analysis](../../attacks/substitution/frequency.md) | Ciphertext > ~100 characters |
 
 ```python
 from hordekit.crypto.attacks.generic import brute_force
 from hordekit.crypto.classical.substitution import Caesar
 
-result = brute_force(Caesar, ciphertext=b"Khoor Zruog")
+result = brute_force(Caesar, b"Khoor Zruog")
 print(result.as_str())                       # best candidate
 print(result.metadata["candidates"][0])      # {"key": {"shift": 3}, "score": ..., "result": ...}
 ```

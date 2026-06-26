@@ -92,14 +92,14 @@ result = (
 
 | Attack | When applicable |
 |--------|----------------|
-| [Brute force](../../../api/base_classes.md) — `hordekit.crypto.attacks.generic.brute_force` | Always — only 312 possible keys |
-| Frequency analysis — `hordekit.crypto.attacks.substitution.frequency` | Ciphertext > ~100 characters |
+| [Brute Force](../../attacks/generic/brute_force.md) | Always — only 312 possible keys |
+| [Frequency Analysis](../../attacks/substitution/frequency.md) | Ciphertext > ~100 characters |
 
 ```python
 from hordekit.crypto.attacks.generic import brute_force
 from hordekit.crypto.classical.substitution import Affine
 
-result = brute_force(Affine, ciphertext=b"IHHWVCSWFRCP")
+result = brute_force(Affine, b"IHHWVCSWFRCP")
 print(result.metadata["candidates"][0]["key"])  # {'a': 5, 'b': 8}
 ```
 
