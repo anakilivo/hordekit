@@ -60,6 +60,7 @@ nav:
         - Affine: crypto/classical/substitution/affine.md
         - Vigenère: crypto/classical/substitution/vigenere.md
         - Autokey: crypto/classical/substitution/autokey.md
+        - Beaufort: crypto/classical/substitution/beaufort.md
     - Attacks:
       - Generic:
         - Brute Force: crypto/attacks/generic/brute_force.md

@@ -17,7 +17,7 @@ Legend: `[x]` done · `[ ]` planned · `[~]` in progress · `[?]` under consider
 - [x] Atbash — code + tests + docs
 - [x] Affine — code + tests + docs
 - [x] Vigenère — code + tests + docs
-- [ ] Autokey — like Vigenère but key is extended with plaintext (harder to crack)
+- [x] Autokey — like Vigenère but key is extended with plaintext (harder to crack)
 - [ ] Beaufort — reciprocal variant of Vigenère (encrypt == decrypt)
 - [ ] Playfair — digraph substitution, 5×5 key square
 - [ ] Hill — matrix-based substitution; vulnerable to known-plaintext attack

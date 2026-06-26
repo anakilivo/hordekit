@@ -58,6 +58,8 @@ Run tests after creating them. All must pass before proceeding.
 
 Create `docs/crypto/classical/{category}/{name}.md` following the structure in `docs/cipher-template.md`.
 
+Update roadmap.md - mark implemenation as completed
+
 The Mermaid diagram must show:
 - The per-byte transformation logic (flowchart)
 - A concrete letter-by-letter example (at least 4-5 chars)
