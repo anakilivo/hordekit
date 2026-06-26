@@ -9,12 +9,12 @@ CTF-oriented toolkit. Modules are independent but share the same `HordeResult` i
 ### Classical ciphers
 
 #### Substitution
-- [x] Caesar
-- [x] ROT13
-- [x] ROT47
-- [x] Atbash
-- [x] Affine
-- [x] Vigenere
+- [x] Caesar — code + tests + docs
+- [x] ROT13 — code + tests + docs
+- [x] ROT47 — code + tests + docs
+- [x] Atbash — code + tests + docs
+- [x] Affine — code + tests + docs
+- [x] Vigenere — code + tests + docs
 - [ ] Playfair
 - [ ] Beaufort
 - [ ] Porta

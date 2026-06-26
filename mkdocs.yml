@@ -51,6 +51,11 @@ nav:
     - Classical:
       - Substitution:
         - Caesar: crypto/classical/substitution/caesar.md
+        - ROT13: crypto/classical/substitution/rot13.md
+        - ROT47: crypto/classical/substitution/rot47.md
+        - Atbash: crypto/classical/substitution/atbash.md
+        - Affine: crypto/classical/substitution/affine.md
+        - Vigenère: crypto/classical/substitution/vigenere.md
   - API Reference:
     - Core: api/base_classes.md
   - Roadmap: roadmap.md
