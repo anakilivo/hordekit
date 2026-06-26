@@ -33,6 +33,8 @@ theme:
     - content.code.annotate
 
 extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   - https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js
 
 plugins:
@@ -61,6 +63,7 @@ nav:
         - Vigenère: crypto/classical/substitution/vigenere.md
         - Autokey: crypto/classical/substitution/autokey.md
         - Beaufort: crypto/classical/substitution/beaufort.md
+        - Playfair: crypto/classical/substitution/playfair.md
     - Attacks:
       - Generic:
         - Brute Force: crypto/attacks/generic/brute_force.md

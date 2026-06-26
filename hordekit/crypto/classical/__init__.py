@@ -1,3 +1,13 @@
-from hordekit.crypto.classical.substitution import ROT13, ROT47, Affine, Atbash, Autokey, Beaufort, Caesar, Vigenere
+from hordekit.crypto.classical.substitution import (
+    ROT13,
+    ROT47,
+    Affine,
+    Atbash,
+    Autokey,
+    Beaufort,
+    Caesar,
+    Playfair,
+    Vigenere,
+)
 
-__all__ = ["Caesar", "ROT13", "ROT47", "Atbash", "Affine", "Vigenere", "Autokey", "Beaufort"]
+__all__ = ["Caesar", "ROT13", "ROT47", "Atbash", "Affine", "Vigenere", "Autokey", "Beaufort", "Playfair"]
