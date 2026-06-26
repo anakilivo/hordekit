@@ -76,7 +76,7 @@ result = (
 
 | Attack | When applicable |
 |--------|----------------|
-| [Brute force](../../attacks/generic/brute_force.md) | Key space is small and enumerable |
+| Brute force — `hordekit.crypto.attacks.generic.brute_force` | Key space is small and enumerable |
 | {Other attack} | {condition} |
 
 ## References

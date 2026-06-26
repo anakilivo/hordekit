@@ -1,62 +1,38 @@
-# Hordekit
+# hordekit
 
-A comprehensive cryptographic library for Python, providing various encryption algorithms, attack methods, and educational tools.
+A modular CTF toolkit for Python. Each module is independent but shares the same `HordeResult` interface and `.pipe()` chaining.
 
-## Features
+## Modules
 
-- **Multiple Cipher Types**: Substitution, transposition, and modern ciphers
-- **Attack Methods**: Brute force, frequency analysis, known plaintext attacks
-- **Educational Focus**: Perfect for learning cryptography concepts
-- **Well Documented**: Comprehensive documentation and examples
-- **Type Safe**: Full type hints and mypy support
-- **Tested**: Extensive test coverage
+| Module | Status | Description |
+|--------|--------|-------------|
+| `crypto` | ✅ Active | Classical and modern ciphers + cryptanalysis |
+| `web` | 🔜 Planned | Web vulnerability tools (SQLi, XSS, SSTI, ...) |
+| `osint` | 🔜 Planned | OSINT tools (username lookup, DNS, dorks, ...) |
+| `forensics` | 🔜 Planned | File analysis, steganography, PCAP |
 
-## Available Ciphers
+## Core concept
 
-### Substitution Ciphers
+Every tool returns a `HordeResult` that can be converted to any format or piped into the next tool:
 
-- **Caesar Cipher**: Simple shift cipher with configurable offset
-- **Affine Cipher**: Mathematical substitution using linear transformation
-- **Atbash Cipher**: Alphabet mirroring cipher
-- **ROT13**: Special case of Caesar cipher with 13-position shift
-- **ROT47**: Extended ROT cipher for printable ASCII characters
-- **Vigenère Cipher**: Polyalphabetic substitution cipher with keyword
+```python
+from hordekit.crypto.classical.substitution import Caesar, ROT13
 
-### Transposition Ciphers
-
-*Coming soon...*
-
-### Modern Ciphers
-
-*Coming soon...*
-
-## Quick Start
-
-The library provides a simple interface for creating and using various cryptographic ciphers. You can start with basic substitution ciphers like the Caesar cipher, which uses a simple shift operation to encrypt and decrypt messages.
-
-## Attack Methods
-
-The library includes various attack methods for analyzing and breaking ciphers, including brute force attacks, frequency analysis, and known plaintext attacks. These methods are designed for educational purposes to understand cryptographic weaknesses.
+result = (
+    Caesar(shift=3).encrypt(b"Hello, World!")
+    .pipe(ROT13)
+    .as_base64()
+)
+```
 
 ## Installation
 
-The library can be installed using pip or other Python package managers.
+```bash
+pip install hordekit
+```
 
-## Development
+## Links
 
-The project uses modern Python development tools including uv for dependency management and comprehensive testing frameworks.
-
-## Documentation
-
-- [Installation Guide](installation.md)
 - [Quick Start](quickstart.md)
-- [Substitution Ciphers](crypto/symmetric/substitution/base_substitution.md)
-- [API Reference](api/)
-
-## Contributing
-
-See [Contributing Guide](development/contributing.md) for details.
-
-## License
-
-MIT License - see LICENSE file for details. 
+- [Roadmap](roadmap.md)
+- [GitHub](https://github.com/anakilivo/hordekit)

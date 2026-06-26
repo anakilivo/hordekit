@@ -1,131 +1,98 @@
-# Base Classes
+# Core API
 
-## BaseSubstitutionCipher
+## HordeResult
 
-Base class for all substitution ciphers that provides common functionality.
+The universal return type for all tools. Wraps `bytes` and provides format conversion and chaining.
 
 ```python
-from hordekit.crypto.symmetric.substitution.base_substitution import BaseSubstitutionCipher
+from hordekit.core import HordeResult
 ```
 
-### Features
+### Conversions
 
-- **Case Preservation**: Maintains original case of letters
-- **Non-alphabetic Handling**: Preserves numbers, punctuation, and spaces
-- **Efficient Translation**: Uses `str.translate()` for fast character mapping
-- **Common Attack Methods**: Built-in brute force and frequency analysis
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `.as_bytes()` | `bytes` | Raw bytes |
+| `.as_str(encoding="utf-8")` | `str` | Decoded string |
+| `.as_hex()` | `str` | Hex string, e.g. `"4a6f"` |
+| `.as_base64()` | `str` | Base64-encoded string |
+| `.as_int(byteorder="big")` | `int` | Integer representation |
 
-### Abstract Methods
-
-Subclasses must implement:
-
-- `_create_mappings()`: Create encryption/decryption translation tables
-- `_get_possible_keys()`: Get all possible keys for this cipher
-- `_key_to_string()`: Convert key dictionary to string representation
-
-### Common Methods
-
-#### _attack_brute_force(**kwargs)
-
-Perform brute force attack on substitution cipher.
-
-**Parameters:**
-- `ciphertext`: Encrypted text to decrypt
-- `mask`: Regular expression pattern to match successful decryption (optional)
-
-**Returns:**
-- Dictionary with all results and best match if mask provided
-
-#### _attack_frequency_analysis(**kwargs)
-
-Perform frequency analysis attack using n-gram scoring.
-
-**Parameters:**
-- `ciphertext`: Encrypted text to analyze
-
-**Returns:**
-- Dictionary with most likely key and confidence scores
-
-### Example Implementation
+### Chaining
 
 ```python
-from hordekit.crypto.symmetric.substitution.base_substitution import BaseSubstitutionCipher
+result.pipe(ToolClass, **init_kwargs) -> HordeResult
+```
 
-class MySubstitutionCipher(BaseSubstitutionCipher):
-    def _create_mappings(self):
-        # Create translation tables
-        self.encrypt_table = str.maketrans(from_chars, to_chars)
-        self.decrypt_table = str.maketrans(to_chars, from_chars)
-    
+Creates an instance of `ToolClass(**init_kwargs)` and calls `.run()` on the current bytes.
+
+```python
+Caesar(shift=3).encrypt(b"Hello").pipe(ROT13).as_hex()
+```
+
+### Metadata
+
+Attacks and other multi-result tools store extra data in `.metadata`:
+
+```python
+result = brute_force(Caesar, ciphertext=b"Khoor")
+result.metadata["candidates"]  # list of {key, result, score}
+```
+
+---
+
+## BaseTool
+
+Abstract base class for all hordekit tools.
+
+```python
+from hordekit.core import BaseTool
+```
+
+```python
+class BaseTool(ABC):
+    def run(self, data: bytes) -> HordeResult: ...
+```
+
+All tools implement `.run()`. For ciphers, `run()` defaults to `encrypt()`.
+
+---
+
+## BaseCipher
+
+Abstract base class for all ciphers. Extends `BaseTool`.
+
+```python
+from hordekit.core import BaseCipher
+```
+
+```python
+class BaseCipher(BaseTool, ABC):
+    def encrypt(self, data: bytes) -> HordeResult: ...
+    def decrypt(self, data: bytes) -> HordeResult: ...
+    def run(self, data: bytes) -> HordeResult: ...          # calls encrypt()
+
     @classmethod
-    def _get_possible_keys(cls):
-        # Return all possible keys
-        return [{"key1": value1}, {"key2": value2}]
-    
+    def possible_keys(cls) -> list[dict[str, Any]]: ...    # raises if not implemented
+```
+
+### Implementing a custom cipher
+
+```python
+from hordekit.core import BaseCipher
+from hordekit.core.result import HordeResult
+
+class XORCipher(BaseCipher):
+    def __init__(self, key: int) -> None:
+        self.key = key
+
+    def encrypt(self, data: bytes) -> HordeResult:
+        return HordeResult(bytes(b ^ self.key for b in data))
+
+    def decrypt(self, data: bytes) -> HordeResult:
+        return self.encrypt(data)  # XOR is self-inverse
+
     @classmethod
-    def _key_to_string(cls, key):
-        # Convert key to string
-        return f"key={key['key1']}"
+    def possible_keys(cls) -> list[dict[str, Any]]:
+        return [{"key": k} for k in range(256)]
 ```
-
-## Algorithm Hierarchy
-
-```
-CryptoAlgorithm (abstract base)
-├── BaseSubstitutionCipher (abstract)
-│   ├── CaesarCipher
-│   ├── AffineCipher
-│   └── AtbashCipher (inherits from AffineCipher)
-└── [Future algorithm types]
-```
-
-### Inheritance Benefits
-
-- **Code Reuse**: Common functionality shared across algorithms
-- **Consistent API**: All algorithms follow the same interface
-- **Easy Testing**: Common test infrastructure
-- **Extensibility**: Easy to add new algorithms
-
-### Translation Table Creation
-
-The base class handles efficient character mapping:
-
-```python
-# Example: Caesar cipher with shift 3
-from_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-to_chars = "DEFGHIJKLMNOPQRSTUVWXYZABCdefghijklmnopqrstuvwxyzabc"
-
-encrypt_table = str.maketrans(from_chars, to_chars)
-decrypt_table = str.maketrans(to_chars, from_chars)
-
-# Usage
-encrypted = text.translate(encrypt_table)
-decrypted = text.translate(decrypt_table)
-```
-
-### Attack Method Implementation
-
-The base class provides common attack implementations:
-
-```python
-# Brute force attack
-results = cipher._attack_brute_force(ciphertext="KHOOR", mask=r"HELLO.*")
-
-# Frequency analysis attack
-analysis = cipher._attack_frequency_analysis(ciphertext="KHOOR ZRUOG")
-```
-
-### Key Management
-
-Each algorithm defines its own key space:
-
-```python
-# Caesar cipher: 25 possible keys (shifts 1-25)
-keys = CaesarCipher._get_possible_keys()  # [{"shift": 1}, {"shift": 2}, ...]
-
-# Affine cipher: 312 possible keys (12 coprime a values × 26 b values)
-keys = AffineCipher._get_possible_keys()  # [{"a": 1, "b": 0}, ...]
-
-# Atbash cipher: 1 possible key (no variability)
-keys = AtbashCipher._get_possible_keys()  # [{"a": 25, "b": 25}]
-``` 

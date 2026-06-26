@@ -6,40 +6,31 @@ on:
   pull_request:
     branches: [ master, develop ]
   schedule:
-    - cron: '0 0 * * 0'  # Run weekly on Sundays
+    - cron: '0 0 * * 0'  # weekly on Sundays
 
 jobs:
-  security:
+  bandit:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: "3.13"
 
     - name: Install uv
-      uses: astral-sh/setup-uv@v1
-      with:
-        version: latest
+      uses: astral-sh/setup-uv@v4
 
     - name: Install dependencies
-      run: |
-        uv sync --dev
+      run: uv sync --dev
 
-    - name: Run Bandit security linter
-      run: |
-        uv run bandit -r hordekit/ -f json -o bandit-report.json || true
+    - name: Bandit security scan
+      run: uv run bandit -r hordekit/ -c pyproject.toml -f json -o bandit-report.json
 
-    - name: Run Safety scan
-      run: |
-        uv run safety scan --json --output safety-report.json || true
-
-    - name: Upload security reports
+    - name: Upload bandit report
+      if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: security-reports
-        path: |
-          bandit-report.json
-          safety-report.json 
+        name: bandit-report
+        path: bandit-report.json

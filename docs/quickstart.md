@@ -1,55 +1,77 @@
 # Quick Start
 
-This guide will help you get started with Hordekit in just a few minutes.
+## Installation
 
-## Basic Usage
+```bash
+pip install hordekit
+```
 
-### Caesar Cipher
+## Encrypting and decrypting
 
-The Caesar cipher is the simplest substitution cipher, using a fixed shift to encrypt and decrypt messages. It's perfect for learning basic cryptographic concepts.
+```python
+from hordekit.crypto.classical.substitution import Caesar, Vigenere
 
-### Affine Cipher
+# Caesar cipher
+c = Caesar(shift=13)
+encrypted = c.encrypt(b"Hello, World!")
+print(encrypted.as_str())                        # Uryyb, Jbeyq!
+print(c.decrypt(encrypted.as_bytes()).as_str())  # Hello, World!
 
-The Affine cipher uses a mathematical function with two parameters to perform encryption and decryption. It provides more complexity than the Caesar cipher while remaining educational.
+# Vigenere
+v = Vigenere(b"KEY")
+enc = v.encrypt(b"ATTACK AT DAWN")
+print(v.decrypt(enc.as_bytes()).as_str())        # ATTACK AT DAWN
+```
 
-### Atbash Cipher
+## Result formats
 
-The Atbash cipher mirrors the alphabet, providing a simple but effective substitution method. It's self-reciprocal, meaning the same operation is used for both encryption and decryption.
+Every operation returns a `HordeResult` you can convert on the fly:
 
-## Attack Methods
+```python
+result = Caesar(shift=3).encrypt(b"Hello")
 
-### Brute Force Attack
+result.as_bytes()   # b'Khoor'
+result.as_str()     # 'Khoor'
+result.as_hex()     # '4b686f6f72'
+result.as_base64()  # 'S2hvb3I='
+result.as_int()     # 334794610
+```
 
-The brute force attack tries all possible keys to decrypt a message. This method is exhaustive but guaranteed to find the correct key if the key space is small enough.
+## Chaining with .pipe()
 
-### Frequency Analysis
+`.pipe(Tool, **kwargs)` passes the current bytes into the next tool's `run()` (which calls `encrypt` by default):
 
-Frequency analysis uses letter frequency patterns to find the most likely key. This method is particularly effective against simple substitution ciphers where letter frequencies are preserved.
+```python
+from hordekit.crypto.classical.substitution import Caesar, ROT13
 
-### Known Plaintext Attack
+result = (
+    Caesar(shift=3).encrypt(b"Hello")
+    .pipe(ROT13)
+    .as_hex()
+)
+```
 
-The known plaintext attack uses known plaintext-ciphertext pairs to derive the encryption key. This method is powerful when you have partial knowledge of the encrypted content.
+## Attacking ciphers
 
-## Key Generation
+```python
+from hordekit.crypto.attacks.generic import brute_force
+from hordekit.crypto.classical.substitution import Caesar
 
-The library supports automatic key generation for various algorithms, creating cryptographically secure random keys of appropriate length and format for each cipher type.
+result = brute_force(Caesar, ciphertext=b"Uryyb Jbeyq")
 
-## Error Handling
+print(result.as_str())                          # Hello World
+print(result.metadata["candidates"][0]["key"])  # {'shift': 13}
+```
 
-All algorithms include proper error handling for invalid parameters, ensuring robust operation and clear error messages when something goes wrong.
+## Available ciphers
 
-## Case Preservation
-
-All algorithms preserve the original case of letters during encryption and decryption, maintaining the formatting and readability of the original text.
-
-## Non-Alphabetic Characters
-
-Numbers, punctuation, and spaces are preserved during encryption and decryption, ensuring that the structure and meaning of the original text are maintained.
-
-## Next Steps
-
-Now that you've learned the basics, explore:
-
-- [Algorithm Documentation](crypto/symmetric/substitution/) for detailed explanations
-- [API Reference](api/) for complete API documentation
-- [Development Guide](development/) for contributing to the project 
+```python
+from hordekit.crypto.classical.substitution import (
+    Caesar,    # Caesar(shift=N)
+    ROT13,     # ROT13()
+    ROT47,     # ROT47()
+    Atbash,    # Atbash()
+    Affine,    # Affine(a=N, b=N)
+    Vigenere,  # Vigenere(b"KEY")
+)
+```

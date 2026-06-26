@@ -51,6 +51,8 @@ nav:
     - Classical:
       - Substitution:
         - Caesar: crypto/classical/substitution/caesar.md
+  - API Reference:
+    - Core: api/base_classes.md
   - Roadmap: roadmap.md
   - Development:
     - Contributing: development/contributing.md
