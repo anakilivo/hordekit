@@ -69,16 +69,16 @@ The **Known Attacks** section must use Markdown links to the attack docs — not
 
 | Attack | When applicable |
 |--------|----------------|
-| [Brute Force](../../../attacks/generic/brute_force.md) | Always — N possible keys |
-| [Frequency Analysis](../../../attacks/substitution/frequency.md) | Ciphertext > ~100 characters |
+| [Brute Force](../../attacks/generic/brute_force.md) | Always — N possible keys |
+| [Frequency Analysis](../../attacks/substitution/frequency.md) | Ciphertext > ~100 characters |
 ```
 
 Relative path from `docs/crypto/classical/{category}/` to attacks:
-- `../../../attacks/generic/brute_force.md`
-- `../../../attacks/generic/dictionary.md`
-- `../../../attacks/substitution/frequency.md`
-- `../../../attacks/substitution/ioc.md`
-- `../../../attacks/vigenere/kasiski.md`
+- `../../attacks/generic/brute_force.md`
+- `../../attacks/generic/dictionary.md`
+- `../../attacks/substitution/frequency.md`
+- `../../attacks/substitution/ioc.md`
+- `../../attacks/vigenere/kasiski.md`
 
 ## 5. Update mkdocs.yml nav
 
