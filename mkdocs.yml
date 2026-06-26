@@ -57,6 +57,7 @@ nav:
   - Development:
     - Contributing: development/contributing.md
     - Testing: development/testing.md
+    - Cipher Template: cipher-template.md
 
 markdown_extensions:
   - admonition

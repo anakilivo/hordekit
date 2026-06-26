@@ -2,46 +2,58 @@
 
 ## Requirements
 
-- Python 3.9 or higher
-- pip or uv package manager
+- Python 3.11 or higher
+- pip or uv
 
-## Installation Methods
+## Install
 
-### Using pip
+=== "pip"
 
-The library can be installed using pip with the standard installation command.
+    ```bash
+    pip install hordekit
+    ```
 
-### Using uv (Recommended)
+=== "uv"
 
-The library can be installed using uv, which provides faster dependency resolution and better package management.
+    ```bash
+    uv add hordekit
+    ```
 
-### From Source
+## From source
 
-If you want to install from the latest development version, you can clone the repository and install it directly from the source code.
+```bash
+git clone https://github.com/anakilivo/hordekit.git
+cd hordekit
+uv sync --dev
+```
 
-## Development Installation
+## Verify
 
-For development and contributing, you can install the library with all development dependencies.
+```python
+from hordekit.crypto.classical.substitution import Caesar
 
-This will install all development dependencies including:
+result = Caesar(shift=3).encrypt(b"Hello")
+print(result.as_str())   # Khoor
+```
 
-- Testing tools (pytest, faker)
-- Code quality tools (black, isort, flake8, mypy)
-- Security tools (bandit, safety)
-- Documentation tools (mkdocs)
+## Dev dependencies
 
-## Verification
+```bash
+uv sync --dev
+```
 
-To verify the installation, you can import the library and test basic functionality to ensure everything is working correctly.
+Includes:
+
+| Tool | Purpose |
+|------|---------|
+| `ruff` | Linting + formatting |
+| `mypy` | Type checking |
+| `bandit` | Security scanning |
+| `pytest` + `pytest-cov` | Tests |
+| `mkdocs` + `mkdocs-material` | Documentation |
 
 ## Troubleshooting
 
-### Common Issues
+**Import error** — check Python version: `python --version` (must be 3.11+)
 
-1. **Import Error**: Make sure you're using Python 3.9+
-2. **Permission Error**: Use `pip install --user` or a virtual environment
-3. **uv not found**: Install uv first: `pip install uv`
-
-### Virtual Environment
-
-We recommend using a virtual environment for development to avoid conflicts with system packages. 
+**uv not found** — install it first: `pip install uv`
