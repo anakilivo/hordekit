@@ -1,6 +1,5 @@
-from math import log10
-
 import pathlib
+from math import log10
 
 ROOT_DIR = pathlib.Path(__file__).parent.resolve()
 
@@ -14,7 +13,7 @@ class _NScoring:
     def __init__(self) -> None:
         ngrams = str(ROOT_DIR.joinpath(self._filename).resolve())
         self._ngrams = {}
-        for line in open(ngrams, "r"):
+        for line in open(ngrams):
             key, count = line.split(" ")
             self._ngrams[key] = int(count)
 

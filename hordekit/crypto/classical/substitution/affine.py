@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any
 
 from hordekit.core.base import BaseCipher
 from hordekit.core.result import HordeResult
@@ -35,5 +35,5 @@ class Affine(BaseCipher):
         return HordeResult(bytes(_dec(b) for b in data))
 
     @classmethod
-    def possible_keys(cls) -> List[Dict[str, Any]]:
+    def possible_keys(cls) -> list[dict[str, Any]]:
         return [{"a": a, "b": b} for a in _VALID_A for b in range(26)]

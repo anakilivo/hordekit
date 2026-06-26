@@ -66,9 +66,21 @@ The Mermaid diagram must show:
 
 Add the new page under the correct section in `mkdocs.yml`.
 
+## 6. Run ruff
+
+After all files are created and tests pass, always run:
+
+```bash
+uv run ruff format hordekit/ tests/
+uv run ruff check --fix hordekit/ tests/
+```
+
+Fix any remaining ruff errors before finishing. Do not skip this step.
+
 ---
 
 After finishing, report:
 - Files created
 - Test results (N passed)
+- Ruff output (clean or issues fixed)
 - Import path: `from hordekit.crypto.classical.{category} import {ClassName}`

@@ -1,14 +1,14 @@
 import base64
-from typing import TYPE_CHECKING, Any, Dict, Optional, Type
+from typing import TYPE_CHECKING, Any, Literal
 
 if TYPE_CHECKING:
     from hordekit.core.base import BaseTool
 
 
 class HordeResult:
-    def __init__(self, data: bytes, metadata: Optional[Dict[str, Any]] = None) -> None:
+    def __init__(self, data: bytes, metadata: dict[str, Any] | None = None) -> None:
         self._data = data
-        self.metadata: Dict[str, Any] = metadata or {}
+        self.metadata: dict[str, Any] = metadata or {}
 
     def as_bytes(self) -> bytes:
         return self._data
@@ -22,10 +22,10 @@ class HordeResult:
     def as_base64(self) -> str:
         return base64.b64encode(self._data).decode("ascii")
 
-    def as_int(self, byteorder: str = "big") -> int:
+    def as_int(self, byteorder: Literal["big", "little"] = "big") -> int:
         return int.from_bytes(self._data, byteorder=byteorder)
 
-    def pipe(self, tool_cls: "Type[BaseTool]", **kwargs: Any) -> "HordeResult":
+    def pipe(self, tool_cls: "type[BaseTool]", **kwargs: Any) -> "HordeResult":
         tool = tool_cls(**kwargs)
         return tool.run(self._data)
 

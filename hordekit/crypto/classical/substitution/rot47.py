@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any
 
 from hordekit.core.base import BaseCipher
 from hordekit.core.result import HordeResult
@@ -18,5 +18,5 @@ class ROT47(BaseCipher):
         return self.encrypt(data)
 
     @classmethod
-    def possible_keys(cls) -> List[Dict[str, Any]]:
+    def possible_keys(cls) -> list[dict[str, Any]]:
         return [{}]

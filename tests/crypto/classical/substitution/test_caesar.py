@@ -1,5 +1,3 @@
-import pytest
-
 from hordekit.crypto.classical.substitution.caesar import Caesar
 
 
@@ -34,5 +32,6 @@ class TestCaesar:
 
     def test_pipe_chaining(self) -> None:
         from hordekit.crypto.classical.substitution.caesar import Caesar as C
+
         result = Caesar(shift=3).encrypt(b"Hello").pipe(C, shift=23)
         assert result.as_str() == "Hello"

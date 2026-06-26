@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List
+from typing import Any
 
 from hordekit.core.result import HordeResult
 
@@ -20,5 +20,5 @@ class BaseCipher(BaseTool, ABC):
         return self.encrypt(data)
 
     @classmethod
-    def possible_keys(cls) -> List[Dict[str, Any]]:
+    def possible_keys(cls) -> list[dict[str, Any]]:
         raise NotImplementedError(f"{cls.__name__} does not support key enumeration")

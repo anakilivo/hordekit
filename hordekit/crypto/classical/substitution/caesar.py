@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any
 
 from hordekit.core.base import BaseCipher
 from hordekit.core.result import HordeResult
@@ -23,5 +23,5 @@ class Caesar(BaseCipher):
         return HordeResult(bytes(_shift_byte(b, -self.shift) for b in data))
 
     @classmethod
-    def possible_keys(cls) -> List[Dict[str, Any]]:
+    def possible_keys(cls) -> list[dict[str, Any]]:
         return [{"shift": i} for i in range(1, 26)]

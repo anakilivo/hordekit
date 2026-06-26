@@ -1,12 +1,10 @@
-from typing import List
-
 from hordekit.core.base import BaseCipher
 from hordekit.core.result import HordeResult
 
 
 class Vigenere(BaseCipher):
     def __init__(self, key: bytes) -> None:
-        values: List[int] = []
+        values: list[int] = []
         for b in key:
             if 65 <= b <= 90:
                 values.append(b - 65)

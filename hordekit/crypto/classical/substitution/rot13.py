@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any
 
 from hordekit.core.result import HordeResult
 from hordekit.crypto.classical.substitution.caesar import Caesar
@@ -12,5 +12,5 @@ class ROT13(Caesar):
         return self.encrypt(data)
 
     @classmethod
-    def possible_keys(cls) -> List[Dict[str, Any]]:
+    def possible_keys(cls) -> list[dict[str, Any]]:
         return [{}]
