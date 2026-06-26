@@ -36,13 +36,13 @@ CTF-oriented toolkit. Modules are independent but share the same `HordeResult` i
 
 #### Generic
 - [x] Brute force (any cipher with enumerable `possible_keys()`)
-- [ ] Dictionary attack
+- [x] Dictionary attack
 
 #### Substitution
 - [x] Frequency analysis (monogram)
-- [ ] Index of coincidence (detects polyalphabetic ciphers)
-- [ ] Kasiski test (Vigenere key length)
-- [ ] Bigram / trigram scoring
+- [x] Index of coincidence (detects polyalphabetic ciphers, estimates key length)
+- [x] Kasiski test (Vigenere key length)
+- [x] Quadgram scoring (used as default scorer in brute_force and dictionary_attack)
 
 #### Transposition
 - [ ] Anagram-based recovery
