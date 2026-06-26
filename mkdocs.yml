@@ -59,6 +59,7 @@ nav:
         - Atbash: crypto/classical/substitution/atbash.md
         - Affine: crypto/classical/substitution/affine.md
         - Vigenère: crypto/classical/substitution/vigenere.md
+        - Autokey: crypto/classical/substitution/autokey.md
     - Attacks:
       - Generic:
         - Brute Force: crypto/attacks/generic/brute_force.md
