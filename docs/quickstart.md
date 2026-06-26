@@ -6,177 +6,45 @@ This guide will help you get started with Hordekit in just a few minutes.
 
 ### Caesar Cipher
 
-The Caesar cipher is the simplest substitution cipher:
-
-```python
-from hordekit.crypto.symmetric.substitution.caesar import CaesarCipher
-
-# Create a Caesar cipher with shift 3
-caesar = CaesarCipher(shift=3)
-
-# Encrypt a message
-message = "HELLO WORLD"
-encrypted = caesar.encode(message)
-print(encrypted)  # Output: KHOOR ZRUOG
-
-# Decrypt the message
-decrypted = caesar.decode(encrypted)
-print(decrypted)  # Output: HELLO WORLD
-```
+The Caesar cipher is the simplest substitution cipher, using a fixed shift to encrypt and decrypt messages. It's perfect for learning basic cryptographic concepts.
 
 ### Affine Cipher
 
-The Affine cipher uses a mathematical function:
-
-```python
-from hordekit.crypto.symmetric.substitution.affine import AffineCipher
-
-# Create an Affine cipher with parameters a=5, b=8
-affine = AffineCipher(a=5, b=8)
-
-# Encrypt a message
-message = "CRYPTO"
-encrypted = affine.encode(message)
-print(encrypted)  # Output: WZQJLA
-
-# Decrypt the message
-decrypted = affine.decode(encrypted)
-print(decrypted)  # Output: CRYPTO
-```
+The Affine cipher uses a mathematical function with two parameters to perform encryption and decryption. It provides more complexity than the Caesar cipher while remaining educational.
 
 ### Atbash Cipher
 
-The Atbash cipher mirrors the alphabet:
-
-```python
-from hordekit.crypto.symmetric.substitution.atbash import AtbashCipher
-
-# Create an Atbash cipher (no parameters needed)
-atbash = AtbashCipher()
-
-# Encrypt a message
-message = "ATBASH"
-encrypted = atbash.encode(message)
-print(encrypted)  # Output: ZGYZHS
-
-# Decrypt the message
-decrypted = atbash.decode(encrypted)
-print(decrypted)  # Output: ATBASH
-```
+The Atbash cipher mirrors the alphabet, providing a simple but effective substitution method. It's self-reciprocal, meaning the same operation is used for both encryption and decryption.
 
 ## Attack Methods
 
 ### Brute Force Attack
 
-Try all possible keys to decrypt a message:
-
-```python
-from hordekit.crypto.utils import AttackMethod
-
-# Try to decrypt a Caesar cipher message
-results = CaesarCipher.attack(
-    AttackMethod.BRUTE_FORCE,
-    ciphertext="KHOOR ZRUOG"
-)
-
-print("All possible decryptions:")
-for key, decrypted in results["all_results"].items():
-    print(f"Shift {key}: {decrypted}")
-```
+The brute force attack tries all possible keys to decrypt a message. This method is exhaustive but guaranteed to find the correct key if the key space is small enough.
 
 ### Frequency Analysis
 
-Use letter frequency patterns to find the most likely key:
-
-```python
-# Analyze a longer text
-analysis = CaesarCipher.attack(
-    AttackMethod.FREQUENCY_ANALYSIS,
-    ciphertext="KHOOR ZRUOG VKXOG"
-)
-
-print(f"Most likely key: {analysis['most_likely_key']}")
-print(f"Decrypted text: {analysis['decrypted_text']}")
-print(f"Confidence score: {analysis['confidence_score']}")
-```
+Frequency analysis uses letter frequency patterns to find the most likely key. This method is particularly effective against simple substitution ciphers where letter frequencies are preserved.
 
 ### Known Plaintext Attack
 
-Use known plaintext-ciphertext pairs:
-
-```python
-# Known plaintext attack on Affine cipher
-result = AffineCipher.attack(
-    AttackMethod.KNOWN_PLAINTEXT,
-    plaintext="HELLO",
-    ciphertext="WZQJLA"
-)
-
-if result:
-    print(f"Recovered key: a={result['a']}, b={result['b']}")
-else:
-    print("Attack failed")
-```
+The known plaintext attack uses known plaintext-ciphertext pairs to derive the encryption key. This method is powerful when you have partial knowledge of the encrypted content.
 
 ## Key Generation
 
-Generate random keys for algorithms:
-
-```python
-# Generate random Caesar cipher
-random_caesar = CaesarCipher.generate_key()
-print(f"Random shift: {random_caesar.shift}")
-
-# Generate random Affine cipher
-random_affine = AffineCipher.generate_key()
-print(f"Random parameters: a={random_affine.a}, b={random_affine.b}")
-```
+The library supports automatic key generation for various algorithms, creating cryptographically secure random keys of appropriate length and format for each cipher type.
 
 ## Error Handling
 
-All algorithms include proper error handling:
-
-```python
-try:
-    # Invalid parameters
-    caesar = CaesarCipher(shift=0)  # Should raise ValueError
-except ValueError as e:
-    print(f"Error: {e}")
-
-try:
-    # Invalid attack method
-    CaesarCipher.attack("invalid_method", ciphertext="test")
-except ValueError as e:
-    print(f"Error: {e}")
-```
+All algorithms include proper error handling for invalid parameters, ensuring robust operation and clear error messages when something goes wrong.
 
 ## Case Preservation
 
-All algorithms preserve the original case:
-
-```python
-caesar = CaesarCipher(shift=3)
-
-# Mixed case
-message = "Hello World!"
-encrypted = caesar.encode(message)
-print(encrypted)  # Output: Khoor Zruog!
-
-decrypted = caesar.decode(encrypted)
-print(decrypted)  # Output: Hello World!
-```
+All algorithms preserve the original case of letters during encryption and decryption, maintaining the formatting and readability of the original text.
 
 ## Non-Alphabetic Characters
 
-Numbers, punctuation, and spaces are preserved:
-
-```python
-caesar = CaesarCipher(shift=3)
-
-message = "Hello, World! 123"
-encrypted = caesar.encode(message)
-print(encrypted)  # Output: Khoor, Zruog! 123
-```
+Numbers, punctuation, and spaces are preserved during encryption and decryption, ensuring that the structure and meaning of the original text are maintained.
 
 ## Next Steps
 

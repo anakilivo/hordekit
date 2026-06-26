@@ -9,43 +9,19 @@
 
 ### Using pip
 
-```bash
-pip install hordekit
-```
+The library can be installed using pip with the standard installation command.
 
 ### Using uv (Recommended)
 
-```bash
-uv add hordekit
-```
+The library can be installed using uv, which provides faster dependency resolution and better package management.
 
 ### From Source
 
-If you want to install from the latest development version:
-
-```bash
-git clone https://github.com/anakilivo/hordekit.git
-cd hordekit
-pip install -e .
-```
-
-Or with uv:
-
-```bash
-git clone https://github.com/anakilivo/hordekit.git
-cd hordekit
-uv sync --dev
-```
+If you want to install from the latest development version, you can clone the repository and install it directly from the source code.
 
 ## Development Installation
 
-For development and contributing:
-
-```bash
-git clone https://github.com/anakilivo/hordekit.git
-cd hordekit
-uv sync --dev
-```
+For development and contributing, you can install the library with all development dependencies.
 
 This will install all development dependencies including:
 
@@ -56,15 +32,7 @@ This will install all development dependencies including:
 
 ## Verification
 
-To verify the installation, run:
-
-```python
-from hordekit.crypto.symmetric.substitution.caesar import CaesarCipher
-
-caesar = CaesarCipher(shift=3)
-result = caesar.encode("HELLO")
-print(result)  # Should print: KHOOR
-```
+To verify the installation, you can import the library and test basic functionality to ensure everything is working correctly.
 
 ## Troubleshooting
 
@@ -76,18 +44,4 @@ print(result)  # Should print: KHOOR
 
 ### Virtual Environment
 
-We recommend using a virtual environment:
-
-```bash
-# Create virtual environment
-python -m venv venv
-
-# Activate it (Linux/Mac)
-source venv/bin/activate
-
-# Activate it (Windows)
-venv\Scripts\activate
-
-# Install hordekit
-pip install hordekit
-``` 
+We recommend using a virtual environment for development to avoid conflicts with system packages. 

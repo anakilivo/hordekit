@@ -1,84 +1,62 @@
-# Hordekit - Cryptographic Toolkit
+# Hordekit
 
-A comprehensive Python library for cryptographic algorithms and analysis tools, designed for educational and research purposes.
+A comprehensive cryptographic library for Python, providing various encryption algorithms, attack methods, and educational tools.
 
-## Overview
+## Features
 
-Hordekit provides implementations of various cryptographic algorithms, focusing on classical and modern cryptographic techniques. The library includes comprehensive documentation, analysis tools, and educational resources for understanding cryptography.
-
-## Key Features
-
-- **Classical Ciphers**: Caesar, Affine, Atbash, and more
+- **Multiple Cipher Types**: Substitution, transposition, and modern ciphers
 - **Attack Methods**: Brute force, frequency analysis, known plaintext attacks
-- **Educational Focus**: Designed for learning cryptography concepts
-- **Comprehensive Testing**: Extensive test coverage with real-world examples
-- **Modern Python**: Type hints, async support, and modern Python features
+- **Educational Focus**: Perfect for learning cryptography concepts
+- **Well Documented**: Comprehensive documentation and examples
+- **Type Safe**: Full type hints and mypy support
+- **Tested**: Extensive test coverage
+
+## Available Ciphers
+
+### Substitution Ciphers
+
+- **Caesar Cipher**: Simple shift cipher with configurable offset
+- **Affine Cipher**: Mathematical substitution using linear transformation
+- **Atbash Cipher**: Alphabet mirroring cipher
+- **ROT13**: Special case of Caesar cipher with 13-position shift
+- **ROT47**: Extended ROT cipher for printable ASCII characters
+- **Vigenère Cipher**: Polyalphabetic substitution cipher with keyword
+
+### Transposition Ciphers
+
+*Coming soon...*
+
+### Modern Ciphers
+
+*Coming soon...*
 
 ## Quick Start
 
-```python
-from hordekit.crypto.symmetric.substitution.caesar import CaesarCipher
+The library provides a simple interface for creating and using various cryptographic ciphers. You can start with basic substitution ciphers like the Caesar cipher, which uses a simple shift operation to encrypt and decrypt messages.
 
-# Create a Caesar cipher with shift 3
-caesar = CaesarCipher(shift=3)
+## Attack Methods
 
-# Encrypt a message
-encrypted = caesar.encode("HELLO WORLD")
-print(encrypted)  # Output: KHOOR ZRUOG
-
-# Decrypt the message
-decrypted = caesar.decode(encrypted)
-print(decrypted)  # Output: HELLO WORLD
-```
+The library includes various attack methods for analyzing and breaking ciphers, including brute force attacks, frequency analysis, and known plaintext attacks. These methods are designed for educational purposes to understand cryptographic weaknesses.
 
 ## Installation
 
-```bash
-pip install hordekit
-```
+The library can be installed using pip or other Python package managers.
 
-Or using uv:
+## Development
 
-```bash
-uv add hordekit
-```
-
-## Available Algorithms
-
-### Symmetric Ciphers
-
-#### Substitution Ciphers
-
-- **Overview**: Base class and common functionality for substitution ciphers
-- **Caesar Cipher**: Simple shift cipher
-- **Affine Cipher**: Mathematical substitution cipher
-- **Atbash Cipher**: Alphabet mirroring cipher
-- **ROT13 Cipher**: Fixed 13-position shift cipher
-- **ROT47 Cipher**: Extended ASCII shift cipher
-
-### Attack Methods
-
-- **Brute Force**: Try all possible keys
-- **Frequency Analysis**: Analyze letter patterns
-- **Known Plaintext**: Use known text-cipher pairs
+The project uses modern Python development tools including uv for dependency management and comprehensive testing frameworks.
 
 ## Documentation
 
-Explore the documentation to learn about:
-
 - [Installation Guide](installation.md)
-- [Quick Start Tutorial](quickstart.md)
-- [Algorithm Documentation](crypto/symmetric/substitution/)
+- [Quick Start](quickstart.md)
+- [Substitution Ciphers](crypto/symmetric/substitution/base_substitution.md)
 - [API Reference](api/)
 
 ## Contributing
 
-We welcome contributions! See our [Contributing Guide](development/contributing.md) for details.
-
-## Security Notice
-
-⚠️ **Important**: This library is designed for educational purposes only. The implemented algorithms are not suitable for secure communication. For real-world applications, use established cryptographic libraries like `cryptography` or `pycryptodome`.
+See [Contributing Guide](development/contributing.md) for details.
 
 ## License
 
-This project is licensed under the MIT License. 
+MIT License - see LICENSE file for details. 

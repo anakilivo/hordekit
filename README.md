@@ -1,1 +1,3 @@
 # hordekit
+
+http://practicalcryptography.com/cryptanalysis/letter-frequencies-various-languages/
