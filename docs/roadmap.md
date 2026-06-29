@@ -20,7 +20,7 @@ Legend: `[x]` done · `[ ]` planned · `[~]` in progress · `[?]` under consider
 - [x] Autokey — like Vigenère but key is extended with plaintext (harder to crack)
 - [x] Beaufort — reciprocal variant of Vigenère (encrypt == decrypt)
 - [x] Playfair — digraph substitution, 5×5 key square
-- [ ] Hill — matrix-based substitution; vulnerable to known-plaintext attack
+- [x] Hill — matrix-based substitution; vulnerable to known-plaintext attack
 - [ ] Polybius square — letter → 2-digit coordinate pair
 - [ ] Four-square — double Playfair variant
 - [ ] Porta — polyalphabetic, 13-row tableau
@@ -97,7 +97,7 @@ This is the most common CTF crypto category. Each attack is a separate module un
 - [x] Quadgram scoring — default scorer for brute_force and dictionary_attack
 - [ ] Chi-squared test — alternative to IoC; better for short texts
 - [ ] Automated Vigenère full crack — Kasiski → IoC confirm → per-column Caesar brute force, returns plaintext
-- [ ] Hill cipher known-plaintext attack — recover key matrix from plaintext/ciphertext pairs
+- [x] Hill cipher known-plaintext attack — recover key matrix from plaintext/ciphertext pairs
 
 #### Transposition
 - [ ] Period detection — IC-based detection of rail fence / columnar period

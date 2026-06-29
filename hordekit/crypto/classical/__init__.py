@@ -6,8 +6,9 @@ from hordekit.crypto.classical.substitution import (
     Autokey,
     Beaufort,
     Caesar,
+    Hill,
     Playfair,
     Vigenere,
 )
 
-__all__ = ["Caesar", "ROT13", "ROT47", "Atbash", "Affine", "Vigenere", "Autokey", "Beaufort", "Playfair"]
+__all__ = ["Caesar", "ROT13", "ROT47", "Atbash", "Affine", "Vigenere", "Autokey", "Beaufort", "Playfair", "Hill"]

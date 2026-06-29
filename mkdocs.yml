@@ -64,6 +64,7 @@ nav:
         - Autokey: crypto/classical/substitution/autokey.md
         - Beaufort: crypto/classical/substitution/beaufort.md
         - Playfair: crypto/classical/substitution/playfair.md
+        - Hill: crypto/classical/substitution/hill.md
     - Attacks:
       - Generic:
         - Brute Force: crypto/attacks/generic/brute_force.md
@@ -73,6 +74,8 @@ nav:
         - Index of Coincidence: crypto/attacks/substitution/ioc.md
       - Vigenère:
         - Kasiski Test: crypto/attacks/vigenere/kasiski.md
+      - Hill:
+        - Known-Plaintext Attack: crypto/attacks/hill/known_plaintext.md
   - API Reference:
     - Core: api/base_classes.md
   - Roadmap: roadmap.md
