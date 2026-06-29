@@ -6,6 +6,7 @@ from hordekit.crypto.classical import (
     Autokey,
     Beaufort,
     Caesar,
+    FourSquare,
     Hill,
     Playfair,
     Polybius,
@@ -24,4 +25,5 @@ __all__ = [
     "Playfair",
     "Hill",
     "Polybius",
+    "FourSquare",
 ]

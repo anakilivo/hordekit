@@ -66,6 +66,7 @@ nav:
         - Playfair: crypto/classical/substitution/playfair.md
         - Hill: crypto/classical/substitution/hill.md
         - Polybius: crypto/classical/substitution/polybius.md
+        - Four-square: crypto/classical/substitution/foursquare.md
     - Attacks:
       - Generic:
         - Brute Force: crypto/attacks/generic/brute_force.md
