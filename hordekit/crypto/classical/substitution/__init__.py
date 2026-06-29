@@ -5,8 +5,21 @@ from hordekit.crypto.classical.substitution.beaufort import Beaufort
 from hordekit.crypto.classical.substitution.caesar import Caesar
 from hordekit.crypto.classical.substitution.hill import Hill
 from hordekit.crypto.classical.substitution.playfair import Playfair
+from hordekit.crypto.classical.substitution.polybius import Polybius
 from hordekit.crypto.classical.substitution.rot13 import ROT13
 from hordekit.crypto.classical.substitution.rot47 import ROT47
 from hordekit.crypto.classical.substitution.vigenere import Vigenere
 
-__all__ = ["Caesar", "ROT13", "ROT47", "Atbash", "Affine", "Vigenere", "Autokey", "Beaufort", "Playfair", "Hill"]
+__all__ = [
+    "Caesar",
+    "ROT13",
+    "ROT47",
+    "Atbash",
+    "Affine",
+    "Vigenere",
+    "Autokey",
+    "Beaufort",
+    "Playfair",
+    "Hill",
+    "Polybius",
+]

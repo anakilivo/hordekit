@@ -65,6 +65,7 @@ nav:
         - Beaufort: crypto/classical/substitution/beaufort.md
         - Playfair: crypto/classical/substitution/playfair.md
         - Hill: crypto/classical/substitution/hill.md
+        - Polybius: crypto/classical/substitution/polybius.md
     - Attacks:
       - Generic:
         - Brute Force: crypto/attacks/generic/brute_force.md
