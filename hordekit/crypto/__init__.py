@@ -4,6 +4,7 @@ from hordekit.crypto.classical import (
     Affine,
     Atbash,
     Autokey,
+    Baconian,
     Beaufort,
     Caesar,
     FourSquare,
@@ -28,4 +29,5 @@ __all__ = [
     "Polybius",
     "FourSquare",
     "Porta",
+    "Baconian",
 ]

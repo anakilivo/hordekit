@@ -1,6 +1,7 @@
 from hordekit.crypto.classical.substitution.affine import Affine
 from hordekit.crypto.classical.substitution.atbash import Atbash
 from hordekit.crypto.classical.substitution.autokey import Autokey
+from hordekit.crypto.classical.substitution.baconian import Baconian
 from hordekit.crypto.classical.substitution.beaufort import Beaufort
 from hordekit.crypto.classical.substitution.caesar import Caesar
 from hordekit.crypto.classical.substitution.foursquare import FourSquare
@@ -26,4 +27,5 @@ __all__ = [
     "Polybius",
     "FourSquare",
     "Porta",
+    "Baconian",
 ]

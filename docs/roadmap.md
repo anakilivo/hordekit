@@ -24,7 +24,7 @@ Legend: `[x]` done · `[ ]` planned · `[~]` in progress · `[?]` under consider
 - [x] Polybius square — letter → 2-digit coordinate pair
 - [x] Four-square — double Playfair variant
 - [x] Porta — polyalphabetic, 13-row tableau
-- [ ] Baconian — 5-bit binary encoding of letters (A=AAAAA … Z=BBBBB)
+- [x] Baconian — 5-bit binary encoding of letters (A=AAAAA … Z=BBBBB)
 
 #### Transposition
 - [ ] Rail Fence — zigzag pattern; key is number of rails
