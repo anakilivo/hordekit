@@ -7,6 +7,7 @@ from hordekit.crypto.classical.substitution.foursquare import FourSquare
 from hordekit.crypto.classical.substitution.hill import Hill
 from hordekit.crypto.classical.substitution.playfair import Playfair
 from hordekit.crypto.classical.substitution.polybius import Polybius
+from hordekit.crypto.classical.substitution.porta import Porta
 from hordekit.crypto.classical.substitution.rot13 import ROT13
 from hordekit.crypto.classical.substitution.rot47 import ROT47
 from hordekit.crypto.classical.substitution.vigenere import Vigenere
@@ -24,4 +25,5 @@ __all__ = [
     "Hill",
     "Polybius",
     "FourSquare",
+    "Porta",
 ]

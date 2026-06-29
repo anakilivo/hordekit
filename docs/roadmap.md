@@ -23,7 +23,7 @@ Legend: `[x]` done · `[ ]` planned · `[~]` in progress · `[?]` under consider
 - [x] Hill — matrix-based substitution; vulnerable to known-plaintext attack
 - [x] Polybius square — letter → 2-digit coordinate pair
 - [x] Four-square — double Playfair variant
-- [ ] Porta — polyalphabetic, 13-row tableau
+- [x] Porta — polyalphabetic, 13-row tableau
 - [ ] Baconian — 5-bit binary encoding of letters (A=AAAAA … Z=BBBBB)
 
 #### Transposition

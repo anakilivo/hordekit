@@ -10,6 +10,7 @@ from hordekit.crypto.classical import (
     Hill,
     Playfair,
     Polybius,
+    Porta,
     Vigenere,
 )
 
@@ -26,4 +27,5 @@ __all__ = [
     "Hill",
     "Polybius",
     "FourSquare",
+    "Porta",
 ]

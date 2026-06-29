@@ -67,6 +67,7 @@ nav:
         - Hill: crypto/classical/substitution/hill.md
         - Polybius: crypto/classical/substitution/polybius.md
         - Four-square: crypto/classical/substitution/foursquare.md
+        - Porta: crypto/classical/substitution/porta.md
     - Attacks:
       - Generic:
         - Brute Force: crypto/attacks/generic/brute_force.md
